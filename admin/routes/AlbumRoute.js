@@ -9,7 +9,7 @@ router.post('/create', verifyJWT, AuthController.createAlbum)
 // Routes to Get/read API Data //
 router.get('/get/:id', verifyJWT, AuthController.getById)
 router.get('/getAll', verifyJWT,  AuthController.getAllAlbum)
-
+//  asefalkj
 // Route to Delete data by id
 router.delete('/delete/:id', verifyJWT, AuthController.deleteById)
 
