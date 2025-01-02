@@ -3,4 +3,4 @@ const Config = {
     PORT : 5000,
     DB_URL : "mongodb+srv://spotify:spotify@spotify.0qovp.mongodb.net/spotify"
 }
-module.exports = Config;
+module.exports = Config; 
