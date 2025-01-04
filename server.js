@@ -13,8 +13,7 @@ const PlaylistRoute = require('./routes/PlaylistRoute');
 const PlaylistSongRoute = require('./routes/PlaylistSongRoute')
 const PricingPlanRoute = require('./routes/PricingRoute')
 const PaymentRoute = require("./routes/PaymentRoute")
-
-
+require('dotenv').config()
 
 const app = express();
 app.use(express.json());
@@ -45,6 +44,7 @@ const AdminAuthRoutes = require("./admin/routes/AuthRoute")
 const AdminSongRoutes = require("./admin/routes/SongRoute");
 const AdminDashboardRoutes = require('./admin/routes/DashboardRoute');
 const AdminPricingPlanRoute = require('./admin/routes/PricingPlanRoute');
+const { log } = require('console');
 
 
 app.use(`${ADMIN_PREFIX}/artist`,AdminArtistRoutes)

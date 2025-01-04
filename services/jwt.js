@@ -1,10 +1,11 @@
 const jwt = require('jsonwebtoken')
 const reply = require("../helpers/Reply")
+require('dotenv').config()
 
 //  generate token 
 const generateJWT = (user) => {
 
-    const token = jwt.sign(user.toObject(), "apikey");
+    const token = jwt.sign(user.toObject(), process.env.JWT_SECRET_KEY);
     return token;
 
 }
@@ -20,7 +21,7 @@ const verifyJWT = (req, res, next) => {
     const token = req.headers?.authorization;
 
     try {
-        const decoded = jwt.verify(token, 'apikey');
+        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
         if (!decoded) {
             return res.status(401).json(reply.failed("unauthrized"))
         }
