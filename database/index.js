@@ -1,6 +1,5 @@
 const { default: mongoose } = require("mongoose");
-const { DB_URL } = require("../config");
-
+require('dotenv').config();
 
 
 
@@ -8,11 +7,12 @@ const { DB_URL } = require("../config");
 const dbconn = () => {
 
     try {
-
+        const DB_URL = process.env.DB_URL
         mongoose.connect(DB_URL);
         const db = mongoose.connection;
         db.on('connected', () => {
             console.log("database connected")
+
         });
 
         db.on('error', () => {
