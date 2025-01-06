@@ -2,7 +2,6 @@ const http = require('http');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const {HOST, PORT} = require('./config/index');
 const AuthRoutes = require('./routes/AuthRoutes');
 require("./database/index");
 const artistRoute = require("./routes/ArtistRoute")
@@ -13,6 +12,11 @@ const PlaylistSongRoute = require('./routes/PlaylistSongRoute')
 const PricingPlanRoute = require('./routes/PricingRoute')
 const PaymentRoute = require("./routes/PaymentRoute")
 require('dotenv').config()
+const HOST = process.env.HOST || "127.0.0.1"
+const PORT = process.env.PORT || 5000
+const DB_URL = process.env.DB_URL
+
+
 
 const app = express();
 app.use(express.json());
