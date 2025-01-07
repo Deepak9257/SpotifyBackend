@@ -22,8 +22,8 @@ const createPlaylist = async (req, res) => {
 }
 
 const getAll = async (req,res)=>{
-
-  const Playlist = await playlistModel.find({})
+  const {userId}=req.body
+  const Playlist = await playlistModel.find({userId})
   return res.json({
     status:true,
     msg:"playlist fetch successfully",
