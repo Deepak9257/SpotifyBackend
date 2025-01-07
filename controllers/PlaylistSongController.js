@@ -26,7 +26,7 @@ const createPlaylistSong = async (req, res) => {
 const getAllSongs = async (req, res) => {
 
     const songs = await playlistSongModel.find({playlistId:req.params.id}).populate(['song','artist', 'album']);
-  
+    
     return res.json({
       status: true,
       message: "songs fetch successfully",
