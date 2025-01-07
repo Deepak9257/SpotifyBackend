@@ -5,16 +5,16 @@ const playlistModel = require("../models/Playlist")
 
 const createPlaylist = async (req, res) => { 
 
-  const { name, image, status } = req.body
+  const { name, image, status, userId } = req.body
 
-  const Exist = await playlistModel.findOne({ name })
+  const Exist = await playlistModel.findOne({ userId,name })
 
   if (Exist) {
     return res.json({ status: false, msg: "Already exist" })
   }
 
   const Playlist = new playlistModel({
-    name, image, isActive: status
+    name, image, isActive: status, userId
   })
 
   Playlist.save();

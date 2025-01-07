@@ -87,15 +87,14 @@ const AuthController = {
 
         const { token } = req.body;
     
-         const decoded = jwt.verify(token,'apikey');
-         const Exist = await userModel.findOne({_id:decoded._id})
+         const decoded = jwt.verify(token,'apikey')
+         const Exist = await userModel.findOne({_id:decoded._id}).select('-password');
     
         if(!Exist){
             return res.json({status : false, message: "Session Expired!"})
         }
     
         return res.json({status : true, message: "getUser details", data : Exist})
-    
     
     }
 

@@ -3,9 +3,9 @@ const playlistSongModel = require("../models/PlaylistSong")
 
 const createPlaylistSong = async (req, res) => {
 
-    const { playlistId, song, status, artist, album } = req.body
+    const { playlistId, song, status, artist, album, userId } = req.body
 
-    const exist = await playlistSongModel.findOne({ playlistId, song })
+    const exist = await playlistSongModel.findOne({ userId, playlistId, song })
 
     if (exist) {
               
@@ -14,7 +14,7 @@ const createPlaylistSong = async (req, res) => {
     }
 
     const PlaylistSong = new playlistSongModel({
-        playlistId, song, status, artist, album
+        playlistId, song, status, artist, album, userId
     })
 
     PlaylistSong.save()

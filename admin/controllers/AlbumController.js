@@ -81,6 +81,4 @@ const getAllAlbum = async (req, res) => {
 
 };
 
-
-
 module.exports = { getAllAlbum, createAlbum, getById, deleteById, updateById };
