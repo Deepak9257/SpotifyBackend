@@ -41,7 +41,17 @@ const getAllByAlbum = async (req, res) => {
     message: "songs fetch successfully",
     data: songs,
   });
-
 };
 
-module.exports = { getAllSongs, getAllByAlbum, getById };
+  const getAllByArtist = async (req, res) => {
+
+    const songs = await songModel.find({artist:req.params.id}).populate(['artist', 'album']);
+  
+    return res.json({
+      status: true,
+      message: "songs fetch successfully",
+      data: songs,
+    });
+};
+
+module.exports = { getAllSongs, getAllByAlbum, getById, getAllByArtist };

@@ -9,6 +9,7 @@ const SongController = require("../controllers/SongController")
 router.get('/get/:id', SongController.getById)
 router.get('/getAll', SongController.getAllSongs)
 router.get('/getAllByAlbum/:id', SongController.getAllByAlbum)
+router.get('/getAllByArtist/:id', SongController.getAllByArtist)
 
 
 module.exports = AuthRoutes = router

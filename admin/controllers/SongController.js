@@ -4,7 +4,7 @@ const songModel = require("../../models/Song")
 
 const createSong = async (req, res) => {
 
-  const { name,album, artist, songfile, time, description, image, status } = req.body;
+  const { name, album, artist, songfile, time, description, image, status } = req.body;
 
   const Exist = await songModel.findOne({ name }) 
 
