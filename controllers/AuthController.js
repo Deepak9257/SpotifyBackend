@@ -32,11 +32,11 @@ const AuthController = {
             return res.json(reply.failed("User Not Exist"));
         }
 
-        const hashPassword = await bcrypt.compare(password, userExist.password)
+        // const hashPassword = await bcrypt.compare(password, userExist.password)
 
-        if (!hashPassword) {
-            return res.json(reply.failed("User Not Exist"));
-        }
+        // if (!hashPassword) {
+        //     return res.json(reply.failed("User Not Exist"));
+        // }
 
         const token = generateJWT(userExist)
 
@@ -87,7 +87,7 @@ const AuthController = {
 
         const salt = await bcrypt.genSalt(10)
         const hashPassword = await bcrypt.hash(password, salt)
-        
+
         const user = new userModel({
             email, name: uname, password: hashPassword
         })
