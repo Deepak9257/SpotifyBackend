@@ -26,7 +26,7 @@ const AuthController = {
     async login(req, res) {
         const { email, password } = req.body;
 
-        const userExist = await userModel.findOne({ email });
+        const userExist = await userModel.findOne({ email , password });
 
         if (!userExist) {
             return res.json(reply.failed("User Not Exist"));
