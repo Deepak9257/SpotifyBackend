@@ -24,10 +24,18 @@ const AuthController = {
     async login(req, res) {
         const { email, password } = req.body;
 
-        const userExist = await userModel.findOne({ email, password });
-        if (!userExist) {
+
+   
+        const userExist = await userModel.findOne({ email });
+     
+        var hashPassword =  bcrypt.compareSync(password, userExist.password);
+        
+
+
+        if (!userExist || !hashPassword) {
             return res.json(reply.failed("User Not Exist"));
         }
+
 
         const token = jwt.sign(userExist.toObject(), 'apikey');
 
@@ -82,7 +90,7 @@ const AuthController = {
         })
 
         user.save();
-        return res.json(reply.success("Sucessfully registered", user));
+        return res.json(reply.success("Sucessfully registered"));
 
     },
 
