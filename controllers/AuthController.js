@@ -81,14 +81,13 @@ const AuthController = {
         const userExist = await userModel.findOne({ email });
 
 
-
         if (userExist) {
             return res.json(reply.failed("Already Exist"));
         }
 
         const salt = await bcrypt.genSalt(10)
         const hashPassword = await bcrypt.hash(password, salt)
-
+        
         const user = new userModel({
             email, name: uname, password: hashPassword
         })
