@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const reply = require("../helpers/Reply");
 const userModel = require("../models/User");
 const SendMail = require("../services/mail");
+const bcrypt = require("bcryptjs")
 
 const AuthController = {
 
@@ -73,8 +74,11 @@ const AuthController = {
             return res.json(reply.failed("Already Exist"));
         }
 
+        var salt =  bcrypt.genSaltSync(10);
+        var hashPassword =  bcrypt.hashSync(password, salt);
+
         const user = new userModel({
-           email, name, password
+           email, name, password:hashPassword
         })
 
         user.save();
