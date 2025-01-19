@@ -21,11 +21,17 @@ const DB_URL = process.env.DB_URL
 const app = express();
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(cors({
-    origin: 'https://spotify9292.netlify.app',  // You can specify your frontend's URL
-    methods: 'GET,POST,PUT,DELETE',  // Allowed HTTP methods
-    credentials: true,  // Allow cookies if needed
-}));
+app.use(cors());
+
+// for Production
+// app.use(cors({
+//     origin: 'https://spotify9292.netlify.app/',  // You can specify your frontend's URL
+//     methods: 'GET,POST,PUT,DELETE',  // Allowed HTTP methods
+//     credentials: true,  // Allow cookies if needed
+// }));
+
+
+
 
 app.get("/",(req,res) => {
     res.json({msg : "API server is working"});
