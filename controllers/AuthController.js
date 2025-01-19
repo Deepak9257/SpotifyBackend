@@ -27,12 +27,12 @@ const AuthController = {
 
    
         const userExist = await userModel.findOne({ email });
+        if (!userExist) {
+            return res.json(reply.failed("User Not Exist"));
+        }
      
         var hashPassword =  bcrypt.compareSync(password, userExist.password);
-        
-
-
-        if (!userExist || !hashPassword) {
+        if (!hashPassword) {
             return res.json(reply.failed("User Not Exist"));
         }
 
