@@ -3,8 +3,7 @@ const reply = require("../helpers/Reply");
 const userModel = require("../models/User");
 const SendMail = require("../services/mail");
 
-const bcrypt = require("bcrypt");
-const { hash } = require("crypto");
+const bcrypt = require("bcryptjs");
 
 
 const AuthController = {
