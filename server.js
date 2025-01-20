@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 // for Production
 app.use(cors({
-    origin: 'https://spotify9292.netlify.app',  // You can specify your frontend's URL
+    origin: ['http://localhost:5173', 'https://spotify9292.netlify.app'],  // You can specify your frontend's URL
     methods: 'GET,POST,PUT,DELETE',  // Allowed HTTP methods
     credentials: true,  // Allow cookies if needed
 }));

@@ -2,21 +2,22 @@ const jwt = require("jsonwebtoken");
 const reply = require("../helpers/Reply");
 const userModel = require("../models/User");
 const SendMail = require("../services/mail");
-const bcrypt = require("bcryptjs")
+const bcrypt = require("bcryptjs");
+const { generateJWT } = require("../services/jwt");
 
 const AuthController = {
 
-    async validateEmail(req,res) {
+    async validateEmail(req, res) {
 
-        const {email} = req.body;
+        const { email } = req.body;
 
-        const exist = await userModel.findOne({email});
+        const exist = await userModel.findOne({ email });
 
-        if(exist) {
-            return res.json({status:false, message:'Already registered'})
+        if (exist) {
+            return res.json({ status: false, message: 'Already registered' })
         }
 
-        return res.json({status:true, message:'Email validated'})
+        return res.json({ status: true, message: 'Email validated' })
 
     },
 
@@ -24,25 +25,30 @@ const AuthController = {
     async login(req, res) {
         const { email, password } = req.body;
 
-
-   
-        const userExist = await userModel.findOne({ email });
+        const userExist = await userModel.findOne({ email })
         if (!userExist) {
             return res.json(reply.failed("User Not Exist"));
         }
-     
-        var hashPassword =  bcrypt.compareSync(password, userExist.password);
+
+        var hashPassword = bcrypt.compareSync(password, userExist.password);
         if (!hashPassword) {
             return res.json(reply.failed("User Not Exist"));
         }
 
+        const userWithoutPassword = userExist.toObject();
+        delete userWithoutPassword.password
 
-        const token = jwt.sign(userExist.toObject(), 'apikey');
+
+
+        const token = jwt.sign(userWithoutPassword, 'apikey');
+
 
         return res.json(reply.success("Login Sucessfully", { token, email }));
 
 
     },
+
+
 
     async forgotPassword(req, res) {
         const { email } = req.body;
@@ -82,11 +88,11 @@ const AuthController = {
             return res.json(reply.failed("Already Exist"));
         }
 
-        var salt =  bcrypt.genSaltSync(10);
-        var hashPassword =  bcrypt.hashSync(password, salt);
+        var salt = bcrypt.genSaltSync(10);
+        var hashPassword = bcrypt.hashSync(password, salt);
 
         const user = new userModel({
-           email, name, password:hashPassword
+            email, name, password: hashPassword
         })
 
         user.save();
@@ -94,24 +100,24 @@ const AuthController = {
 
     },
 
-    async getUser (req,res) {
+    async getUser(req, res) {
 
 
         const { token } = req.body;
-    
-         const decoded = jwt.verify(token,'apikey')
-         const Exist = await userModel.findOne({_id:decoded._id}).select('-password');
-    
-        if(!Exist){
-            return res.json({status : false, message: "Session Expired!"})
+
+        const decoded = jwt.verify(token, 'apikey')
+        const Exist = await userModel.findOne({ _id: decoded._id }).select('-password');
+
+        if (!Exist) {
+            return res.json({ status: false, message: "Session Expired!" })
         }
-    
-        return res.json({status : true, message: "getUser details", data : Exist})
-    
+
+        return res.json({ status: true, message: "getUser details", data: Exist })
+
     }
 
 
 }
 
-    
+
 module.exports = AuthController;
