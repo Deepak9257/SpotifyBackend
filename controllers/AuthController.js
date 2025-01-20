@@ -26,7 +26,7 @@ const AuthController = {
 
 
    
-        const userExist = await userModel.findOne({ email }).select('-password');
+        const userExist = await userModel.findOne({ email });
         if (!userExist) {
             return res.json(reply.failed("User Not Exist"));
         }
