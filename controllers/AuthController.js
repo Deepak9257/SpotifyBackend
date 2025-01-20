@@ -39,7 +39,7 @@ const AuthController = {
 
         const token = jwt.sign(userExist.toObject(), 'apikey');
 
-        return res.json(reply.success("Login Sucessfully", { token, email, password }));
+        return res.json(reply.success("Login Sucessfully", { token, email }));
 
 
     },
