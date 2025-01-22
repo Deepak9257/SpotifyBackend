@@ -4,7 +4,6 @@ const artistModel = require("../../models/Artist")
 
 const createArtist = async (req, res) => {
 
-
   const { name, description, image } = req.body;
 
   const Exist = await artistModel.findOne({ name })

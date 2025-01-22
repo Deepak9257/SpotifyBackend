@@ -2,8 +2,6 @@ const { default: mongoose } = require("mongoose");
 require('dotenv').config();
 
 
-
-
 const dbconn = () => {
 
     try {
@@ -12,7 +10,7 @@ const dbconn = () => {
         const db = mongoose.connection;
         db.on('connected', () => {
             console.log("database connected")
-
+            
         });
 
         db.on('error', () => {

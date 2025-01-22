@@ -10,6 +10,7 @@ router.get('/get/:id', SongController.getById)
 router.get('/getAll', SongController.getAllSongs)
 router.get('/getAllByAlbum/:id', SongController.getAllByAlbum)
 router.get('/getAllByArtist/:id', SongController.getAllByArtist)
+router.get('/search', SongController.getSearch)
 
 
 module.exports = AuthRoutes = router

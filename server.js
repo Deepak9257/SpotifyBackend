@@ -14,7 +14,6 @@ const PaymentRoute = require("./routes/PaymentRoute")
 require('dotenv').config()
 const HOST = process.env.HOST || "127.0.0.1"
 const PORT = process.env.PORT || 5000
-const DB_URL = process.env.DB_URL
 
 
 
@@ -56,7 +55,7 @@ const AdminAuthRoutes = require("./admin/routes/AuthRoute")
 const AdminSongRoutes = require("./admin/routes/SongRoute");
 const AdminDashboardRoutes = require('./admin/routes/DashboardRoute');
 const AdminPricingPlanRoute = require('./admin/routes/PricingPlanRoute');
-const { log } = require('console');
+
 
 
 app.use(`${ADMIN_PREFIX}/artist`,AdminArtistRoutes)
