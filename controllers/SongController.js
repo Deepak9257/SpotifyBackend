@@ -45,7 +45,7 @@ const getSearch = async (req, res) => {
       return songName.includes(searchQuery) || artistName.includes(searchQuery) || albumName.includes(searchQuery)
     })
 
-    console.log(searchQuery)
+    console.log('search query :', searchQuery)
 
     return res.json({
       status: true,
