@@ -38,9 +38,9 @@ const deleteById = async (req, res) => {
  
 const updateById = async (req, res) => {
 
-  const { name, album, artist, songfile, time, description, image, status} = req.body;
+  const { name, album, artist, songfile, time, description, image, status, keywords} = req.body;
 
-  const Exist = await songModel.findByIdAndUpdate({_id:req.params.id} , {name, album, artist, songfile, time, description, image, isActive:status})
+  const Exist = await songModel.findByIdAndUpdate({_id:req.params.id} , {name, album, artist, songfile, time, description, image, keywords, isActive:status})
   
   if(!Exist){
     return res.json({status:false, message: "Song not found"});

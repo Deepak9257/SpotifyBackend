@@ -13,7 +13,8 @@ const artistSchema = new mongoose.Schema({
         default: true
     },
     keywords:{
-        type:String
+        type:String,
+        default:true
     },
     image: {
         type: String,

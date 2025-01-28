@@ -4,7 +4,7 @@ const albumModel = require("../../models/Album")
 
 const createAlbum = async (req, res) => {
   
-  const { name, description, artist, image, status } = req.body;
+  const { name, description, artist, image, status, keywords } = req.body;
 
   const Exist = await albumModel.findOne({ name }) 
 
@@ -13,7 +13,7 @@ const createAlbum = async (req, res) => {
   }
 
   const Album = new albumModel({
-    name, artist, description, image, isActive:status
+    name, artist, description, image, isActive:status, keywords
 
   })
   
@@ -39,9 +39,9 @@ const deleteById = async (req, res) => {
 
 const updateById = async (req, res) => {
 
-  const { name, description, image, artist, status} = req.body;
+  const { name, description, image, artist, status, keywords} = req.body;
 
-  const Exist = await albumModel.findByIdAndUpdate({_id:req.params.id}, {name, description, artist, image, isActive:status})
+  const Exist = await albumModel.findByIdAndUpdate({_id:req.params.id}, {name, description, artist, image, isActive:status, keywords})
   
   if(!Exist){
     return res.json({status:false, message: "Album not found"});

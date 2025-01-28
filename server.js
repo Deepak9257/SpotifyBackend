@@ -31,7 +31,6 @@ app.use(cors({
 }));
 
 
-
 app.get("/",(req,res) => {
     res.json({msg : "API server is working"});
 });

@@ -4,7 +4,7 @@ const artistModel = require("../../models/Artist")
 
 const createArtist = async (req, res) => {
 
-  const { name, description, image } = req.body;
+  const { name, description, image, keywords } = req.body;
 
   const Exist = await artistModel.findOne({ name })
 
@@ -13,7 +13,7 @@ const createArtist = async (req, res) => {
   }
 
   const Artist = new artistModel({
-    name, description, image
+    name, description, image, keywords
 
   })
 
@@ -39,9 +39,9 @@ const deleteById = async (req, res) => {
 
 const updateById = async (req, res) => {
 
-  const { name, description, image, status} = req.body;
+  const { name, description, image, status , keywords} = req.body;
 
-  const Exist = await artistModel.findByIdAndUpdate({_id:req.params.id} , {name, description, image, isActive:status})
+  const Exist = await artistModel.findByIdAndUpdate({_id:req.params.id} , {name, description, image, keywords, isActive:status})
   
   if(!Exist){
     return res.json({status:false, message: "Artist not found"});
