@@ -29,7 +29,7 @@ app.use(cors({
     allowedHeaders: 'Content-Type,Authorization',
     credentials: true,  // Allow cookies if needed
 }));
-
+  
 
 app.get("/",(req,res) => {
     res.json({msg : "API server is working"});
