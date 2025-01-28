@@ -18,6 +18,9 @@ const albumbSchema = new mongoose.Schema({
         type: Boolean,
         default: true
     },
+    keywords:{
+        type:String
+    },
     image: {
         type: String,
         required:true

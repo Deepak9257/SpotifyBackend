@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const userModel = require("../../models/User")
 const { generateJWT } = require("../../services/jwt");
-
+const bcrypt = require('bcryptjs')
 
 const AuthController = { 
     
@@ -9,16 +9,20 @@ const AuthController = {
 
     const { email, password } = req.body;
 
-    const Exist = await userModel.findOne({ email, password, role: "admin" })
+    const Exist = await userModel.findOne({ email, role: "admin" })
 
     if (!Exist) {
-
         return res.json({ status: false, message: "User Not Found" })
+    }
+
+    var hashPassword = bcrypt.compareSync(password, Exist.password)
+    if(!hashPassword){
+        return res.json({ status: false, message: "User Not Found pswrd mismatch" })
     }
 
     const token = generateJWT(Exist)
 
-    return res.json({ status: true, message: "Login Succussfully", token })
+    return res.json({ status: true, message: "Login Succussfully", token, email })
 
 }
 

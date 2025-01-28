@@ -30,6 +30,11 @@ const songSchema = new mongoose.Schema({
     image: {
         type: String,
     },
+    
+    keywords:{
+        type:String
+    },
+
     songfile: {
         type: String,
     }

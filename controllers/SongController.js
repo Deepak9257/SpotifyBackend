@@ -41,8 +41,9 @@ const getSearch = async (req, res) => {
       const songName = song.name.toLocaleLowerCase();
       const artistName = song.artist.name.toLocaleLowerCase();
       const albumName = song.album.name.toLocaleLowerCase();
-
-      return songName.includes(searchQuery) || artistName.includes(searchQuery) || albumName.includes(searchQuery)
+      const keywords = song.keywords.toLocaleLowerCase()
+      
+      return songName.includes(searchQuery) || artistName.includes(searchQuery) || albumName.includes(searchQuery) || keywords.includes(searchQuery)
     })
 
     console.log('search query :', searchQuery)
