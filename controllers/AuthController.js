@@ -3,6 +3,7 @@ const reply = require("../helpers/Reply");
 const userModel = require("../models/User");
 const SendMail = require("../services/mail");
 const bcrypt = require("bcryptjs");
+const { generateJWT } = require("../services/jwt");
 
 
 const AuthController = {
@@ -25,25 +26,25 @@ const AuthController = {
     async login(req, res) {
         const { email, password } = req.body;
 
-        const userExist = await userModel.findOne({ email })
+        const Exist = await userModel.findOne({ email })
       
-        if (!userExist) {
+        if (!Exist) {
             return res.json(reply.failed("User Not Exist"));
         }
 
-        var hashPassword = bcrypt.compareSync(password, userExist.password);
+        var hashPassword = bcrypt.compareSync(password, Exist.password);
         if (!hashPassword) {
             return res.json(reply.failed("User Not Exist"));
         }
 
-        // const userWithoutPassword = userExist.toObject();
+        // const userWithoutPassword = Exist.toObject();
         // delete userWithoutPassword.password
 
 
-        const token = jwt.sign(userExist, 'apikey');
+        const token = generateJWT(Exist)
 
 
-        return res.json(reply.success("Login Sucessfully", { token, email }));
+        return res.json(reply.success("Login Sucessfully",  token, email ));
 
 
     },
