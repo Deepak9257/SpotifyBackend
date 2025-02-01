@@ -48,12 +48,12 @@ const getSearch = async (req, res) => {
       const albumKeywords = song.artist.keywords.toLocaleLowerCase();
 
       return (
-        songName.includes(searchQuery) ||
-        artistName.includes(searchQuery) ||
-        albumName.includes(searchQuery) ||
-        songKeywords.includes(searchQuery) ||
-        artistKeywords.includes(searchQuery) ||
-        albumKeywords.includes(searchQuery)
+        songName.startsWith(searchQuery) ||
+        artistName.startsWith(searchQuery) ||
+        albumName.startsWith(searchQuery) ||
+        songKeywords.startsWith(searchQuery) ||
+        artistKeywords.startsWith(searchQuery) ||
+        albumKeywords.startsWith(searchQuery)
       );
     });
 
