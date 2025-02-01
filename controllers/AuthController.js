@@ -37,13 +37,11 @@ const AuthController = {
             return res.json(reply.failed("User Not Exist"));
         }
 
-   
-
 
         const token = generateJWT(Exist)
 
 
-        return res.json(reply.success("logined successfully", token) );
+        return res.json(reply.success("logined successfully", {token}) );
 
 
     },
