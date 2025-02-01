@@ -43,7 +43,7 @@ const AuthController = {
         const token = generateJWT(Exist)
 
 
-        return res.json({status:true, message:"Logined sucessfully", token, email} );
+        return res.json(reply.success("logined successfully", token) );
 
 
     },
