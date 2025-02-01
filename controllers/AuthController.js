@@ -37,14 +37,13 @@ const AuthController = {
             return res.json(reply.failed("User Not Exist"));
         }
 
-        // const userWithoutPassword = Exist.toObject();
-        // delete userWithoutPassword.password
+   
 
 
         const token = generateJWT(Exist)
 
 
-        return res.json(reply.success("Login Sucessfully",  token, email ));
+        return res.json({status:true, msg:"Logined sucessfully", token, email} );
 
 
     },
