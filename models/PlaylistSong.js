@@ -8,7 +8,7 @@ const playlistSongSchema = new mongoose.Schema({
     },
     
     playlistId: {
-        type: String,
+        type: Array,
         required: true
     },
 
@@ -17,6 +17,7 @@ const playlistSongSchema = new mongoose.Schema({
         ref:"songs",
         required:true
     },
+    
     album:{
         type: String,
         ref:"album",

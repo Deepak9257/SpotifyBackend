@@ -28,15 +28,12 @@ const getAllSongs = async (req, res) => {
 };
 
 // search Functionality
-
 const getSearch = async (req, res) => {
-  const searchQuery = req.query.search
-    ? req.query.search.toLocaleLowerCase()
-    : "";
+  const searchQuery = req.query.search ? req.query.search.toLocaleLowerCase() : "";
+  const songs = await songModel.find({}).populate(["artist", "album"]);
 
   if (searchQuery) {
-    const songs = await songModel.find({}).populate(["artist", "album"]);
-
+   
     const filterData = songs.filter((song) => {
       const songName = song.name.toLocaleLowerCase();
       const songKeywords = song.keywords.toLocaleLowerCase();
@@ -48,12 +45,12 @@ const getSearch = async (req, res) => {
       const albumKeywords = song.artist.keywords.toLocaleLowerCase();
 
       return (
-        songName.startsWith(searchQuery) ||
-        artistName.startsWith(searchQuery) ||
-        albumName.startsWith(searchQuery) ||
-        songKeywords.startsWith(searchQuery) ||
-        artistKeywords.startsWith(searchQuery) ||
-        albumKeywords.startsWith(searchQuery)
+        songName.contains(searchQuery) ||
+        artistName.contains(searchQuery) ||
+        albumName.contains(searchQuery) ||
+        songKeywords.contains(searchQuery) ||
+        artistKeywords.contains(searchQuery) ||
+        albumKeywords.contains(searchQuery)
       );
     });
 
@@ -66,7 +63,6 @@ const getSearch = async (req, res) => {
     });
   }
 
-  const songs = await songModel.find({}).populate(["artist", "album"]);
 
   return res.json({
     status: true,
