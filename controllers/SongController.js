@@ -45,12 +45,12 @@ const getSearch = async (req, res) => {
       const albumKeywords = song.artist.keywords.toLocaleLowerCase();
 
       return (
-        songName.contains(searchQuery) ||
-        artistName.contains(searchQuery) ||
-        albumName.contains(searchQuery) ||
-        songKeywords.contains(searchQuery) ||
-        artistKeywords.contains(searchQuery) ||
-        albumKeywords.contains(searchQuery)
+        songName.includes(searchQuery) ||
+        artistName.includes(searchQuery) ||
+        albumName.includes(searchQuery) ||
+        songKeywords.includes(searchQuery) ||
+        artistKeywords.includes(searchQuery) ||
+        albumKeywords.includes(searchQuery)
       );
     });
 
