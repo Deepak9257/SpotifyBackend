@@ -8,7 +8,7 @@ const playlistSongSchema = new mongoose.Schema({
     },
     
     playlistId: {
-        type: Array,
+        type: String,
         required: true
     },
 
