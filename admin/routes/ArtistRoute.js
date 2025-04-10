@@ -1,22 +1,21 @@
 const express = require("express")
 const router = express.Router();
 const ArtistController = require("../controllers/ArtistController")
-const {verifyJWT} = require("../../services/jwt")
+const {verifyJWT} = require("../../services/jwt");
+const upload = require("../../middlewares/multer");
 
-// Routes to Post/Send/create API Data //
-router.post('/create',  verifyJWT, ArtistController.createArtist)
+// Route to create API Data //
+router.post('/create', upload.array('image'), ArtistController.createArtist)
 
-// Routes to Get/read API Data //
+// Routes to Get/read API Data // 
 router.get('/get/:id', verifyJWT, ArtistController.getById)
 router.get('/getAll', verifyJWT, ArtistController.getAllArtist)
  
 // Route to Delete data by id
-router.delete('/delete/:id', verifyJWT, ArtistController.deleteById)
+router.delete('/delete',  ArtistController.deleteById)
 
 //Route to Update data by id
-router.put('/update/:id', verifyJWT, ArtistController.updateById)
-
-
+router.put('/update', upload.array('image'), ArtistController.updateById)
 
 
 module.exports = AuthRoutes = router

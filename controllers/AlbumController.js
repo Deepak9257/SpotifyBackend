@@ -22,4 +22,4 @@ const getAllAlbum = async (req, res) => {
 
 };
 
-module.exports = AlbumController={getAllAlbum, getById};
+module.exports = AlbumController = {getAllAlbum, getById};

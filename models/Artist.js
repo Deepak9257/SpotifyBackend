@@ -14,10 +14,10 @@ const artistSchema = new mongoose.Schema({
     },
     keywords:{
         type:String,
-        default:true
+        
     },
     image: {
-        type: String,
+        type:String,
     }
 },{
 timestamps:true
