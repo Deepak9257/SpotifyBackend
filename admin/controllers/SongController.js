@@ -1,14 +1,14 @@
 const songModel = require("../../models/Song");
 const { uploadFile, deleteFile } = require("../../utils/cloudinary");
 
-
-
 const createSong = async (req, res) => {
 
   const filesArray = req.files; // get file array from multer
 
-  const filePath = [filesArray['songfile'][0].path, filesArray['image'][0].path] // extract the path and set in array
-
+  let filePath = [] 
+  if (filesArray && filesArray.image) {
+    filePath.push(filesArray['songfile'][0].path, filesArray['image'][0].path) // extract the path and set in array
+  }
   const fileUrl = await uploadFile(filePath); // upload the file in cloudinary
 
   const { name, album, artist, time, description, status, keywords } = req.body;
@@ -69,7 +69,7 @@ const updateById = async (req, res) => {
     AudiofilePath.push(fileArray['songfile'][0].path) // extract the path of the file
   }
 
-  if(fileArray && fileArray.image){
+  if (fileArray && fileArray.image) {
     ImgfilePath.push(fileArray['image'][0].path) // extract the path of the file
   }
 
@@ -88,12 +88,10 @@ const updateById = async (req, res) => {
     imageUrl = uploadRes[0]
   }
 
-  const { name, album, artist, description, status, keywords } = req.body; // get the text data from body
+  const { name, album, artist, description, time, status, keywords } = req.body; // get the text data from body
 
-  
+
   const updateFields = {}
-
-
 
   // check if fields has value then save the data in mongodb
   if (name) {
@@ -120,6 +118,9 @@ const updateById = async (req, res) => {
     updateFields.keywords = keywords
   }
 
+  if(time){
+    updateFields.time = time
+  }
   if (imageUrl) {
     updateFields.image = imageUrl;
   }
