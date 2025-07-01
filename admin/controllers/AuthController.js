@@ -1,4 +1,3 @@
-const jwt = require("jsonwebtoken");
 const userModel = require("../../models/User")
 const { generateJWT } = require("../../services/jwt");
 const bcrypt = require('bcryptjs')
@@ -17,7 +16,7 @@ const AuthController = {
 
     var hashPassword = bcrypt.compareSync(password, Exist.password)
     if(!hashPassword){
-        return res.json({ status: false, message: "User Not Found pswrd mismatch" })
+        return res.json({ status: false, message: "User Not Found" })
     }
 
     const token = generateJWT(Exist)

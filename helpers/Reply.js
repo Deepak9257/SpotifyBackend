@@ -18,5 +18,4 @@ const failed = (message) => {
 
 }
 
-
 module.exports = reply = {failed,success}

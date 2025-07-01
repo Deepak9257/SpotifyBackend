@@ -16,16 +16,13 @@ const razorpayInstance = new Razorpay({
 
 const createPayment = async (req, res) => {
   
-  const { userId, orderId, paymentId, status, amount, razorpay_signature } = req.body;
+  const { orderId, paymentId, status, amount, razorpay_signature } = req.body;
 
   const Exist = await  paymentModel.findOne({ paymentId, userId:req.user._id }) 
 
   if (Exist) {
     return res.json({ status: false, message: "Payment Exist" })
   }
-
-  
-  
 
   const Payment = new paymentModel({
     userId:req.user._id, orderId, paymentId, status:(razorpay_signature)? "completed":status, amount, razorpay_signature
